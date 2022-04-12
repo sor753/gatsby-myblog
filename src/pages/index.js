@@ -1,6 +1,9 @@
 import * as React from "react"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
+
 // markup
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
   return (
  		<div>
 			<header className="header">
@@ -20,7 +23,7 @@ const IndexPage = () => {
 			</header>
 			<section className="hero">
 				<figure>
-					<img src="/images/hero.jpg" alt="" />
+					<Img fluid={data.file.childImageSharp.fluid} alt="" />
 				</figure>
 				<div className="catch">
 					<h1>There is no love sincerer than<br /> the love of food.</h1>
@@ -102,3 +105,16 @@ const IndexPage = () => {
 }
 
 export default IndexPage
+
+
+export const query = graphql`
+	query {
+		file(relativePath: {eq: "hero.jpg"}) {
+			childImageSharp {
+				fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid_withWebp
+				}
+			}
+		}
+	}
+`
