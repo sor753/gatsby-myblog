@@ -1,7 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `myblog`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: `ESSENTIALS`,
+    description: `おいしい食材と食事を探求するサイト`,
+    lang: `ja`
   },
   plugins: [
     `gatsby-transformer-sharp`,
