@@ -4,9 +4,12 @@ import Img from "gatsby-image"
 
 import Layout from '../components/layout'
 
+import Seo from '../components/seo'
+
 // markup
 const IndexPage = ({ data }) => (
   <Layout>
+    <Seo />
     <section className="hero">
       <figure>
         <Img fluid={data.hero.childImageSharp.fluid}
