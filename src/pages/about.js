@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUtensils, faCheckSquare } from "@fortawesome/free-solid-svg-icons"
 
 // markup
-export default ({ data }) => (
+const AboutPage = ({ data }) => (
   <Layout>
 		<div>
 			<div className="eyecatch">
@@ -50,6 +50,8 @@ export default ({ data }) => (
 		</div>
   </Layout>
 )
+
+export default AboutPage
 
 export const query = graphql`
 	query {

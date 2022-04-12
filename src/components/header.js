@@ -1,6 +1,6 @@
 import * as React from "react"
 
-export default () => (
+const Header = () => (
   <header className="header">
     <div className="container">
       <div className="site">
@@ -17,3 +17,5 @@ export default () => (
     </div>
   </header>
 )
+
+export default Header

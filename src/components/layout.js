@@ -5,11 +5,11 @@ import Footer from '../components/footer'
 
 import './layout.css'
 
-import '@fortAwesome/fontawesome-svg-core/styles.css'
-import { config } from '@fortAwesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import { config } from '@fortawesome/fontawesome-svg-core'
 config.atoAddCss = false
 
-export default ({ children }) => (
+const Layout = ({ children }) => (
   <div>
     <Header />
 
@@ -18,3 +18,5 @@ export default ({ children }) => (
     <Footer />
   </div> 
 )
+
+export default Layout
