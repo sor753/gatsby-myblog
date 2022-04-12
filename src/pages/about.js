@@ -5,12 +5,15 @@ import Img from "gatsby-image"
 import Layout from '../components/layout'
 
 // markup
-const IndexPage = ({ data }) => (
+export default ({ data }) => (
   <Layout>
 		<div>
 			<div className="eyecatch">
 				<figure>
-					<img src="images/about.jpg" alt="ブルーベリー＆ヨーグルト" />
+					<Img
+						fluid={data.about.childImageSharp.fluid}
+						alt="ブルーベリー＆ヨーグルト"
+					/>
 				</figure>
 			</div>
 			<article className="content">
@@ -41,49 +44,11 @@ const IndexPage = ({ data }) => (
   </Layout>
 )
 
-export default IndexPage
-
-
 export const query = graphql`
 	query {
-    hero: file(relativePath: {eq: "hero.jpg"}) {
+    about: file(relativePath: {eq: "about.jpg"}) {
 			childImageSharp {
 				fluid(maxWidth: 1600) {
-          ...GatsbyImageSharpFluid_withWebp
-				}
-			}
-		}
-    fruit: file(relativePath: {eq: "fruit.jpg"}) {
-			childImageSharp {
-				fluid(maxWidth: 320) {
-          ...GatsbyImageSharpFluid_withWebp
-				}
-			}
-		}
-    grain: file(relativePath: {eq: "grain.jpg"}) {
-			childImageSharp {
-				fluid(maxWidth: 320) {
-          ...GatsbyImageSharpFluid_withWebp
-				}
-			}
-		}
-    beverage: file(relativePath: {eq: "beverage.jpg"}) {
-			childImageSharp {
-				fluid(maxWidth: 320) {
-          ...GatsbyImageSharpFluid_withWebp
-				}
-			}
-		}
-    berry: file(relativePath: {eq: "berry.jpg"}) {
-			childImageSharp {
-				fluid(maxWidth: 1600) {
-          ...GatsbyImageSharpFluid_withWebp
-				}
-			}
-		}
-    pattern: file(relativePath: {eq: "pattern.jpg"}) {
-			childImageSharp {
-				fluid(maxWidth: 1920, quality: 90) {
           ...GatsbyImageSharpFluid_withWebp
 				}
 			}
