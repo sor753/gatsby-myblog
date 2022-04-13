@@ -10,6 +10,7 @@ const Seo = props => {
 					title
 					lang
 					description
+          siteUrl
 				}
 			}
 		}
@@ -21,11 +22,15 @@ const Seo = props => {
 
   const desc = props.pagedesc || data.site.siteMetadata.description
 
+  const url = props.pagepath
+    ? `${data.site.siteMetadata.siteUrl}${props.pagepath}`
+    : data.site.siteMetadata.siteUrl
   return (
     <Helmet>
       <html lang={data.site.siteMetadata.lang} />
       <title>{title}</title>
       <meta name="description" content={desc} />
+      <link rel="canonical" href={url} />
     </Helmet>
   )
 }
