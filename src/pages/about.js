@@ -7,9 +7,15 @@ import Layout from '../components/layout'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUtensils, faCheckSquare } from "@fortawesome/free-solid-svg-icons"
 
+import Seo from '../components/seo'
+
 // markup
 const AboutPage = ({ data }) => (
   <Layout>
+    <Seo
+      pagetitle="ESSENTIALSについて"
+      pagedesc="食べ物についての情報を発信しているサイトです。"
+    />
 		<div>
 			<div className="eyecatch">
 				<figure>
