@@ -29,6 +29,7 @@ module.exports = {
         display: `standalone`,
         icon: `src/imgaes/icon.png`,
       }
-    }
+    },
+    `gatsby-plugin-offline`,
   ],
 }
