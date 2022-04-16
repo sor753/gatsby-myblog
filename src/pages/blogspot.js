@@ -1,30 +1,39 @@
 import * as React from "react"
+import { graphql } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faFolderOpen } from "@fortawesome/free-regular-svg-icons"
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"
 
-const BlogSpot = () => (
+const BlogSpot = ({ data }) => (
   <Layout>
 		<div>
 			<div className="eyecatch">
 				<figure>
-					<img src="images-baseblog/eyecatch.jpg" alt="アイキャッチ画像の説明" />
+          <GatsbyImage
+            image={getImage(data.contentfulBlogPost.eyecatch.gatsbyImageData)}
+            alt={data.contentfulBlogPost.eyecatch.description} 
+          />
 				</figure>
 			</div>
 			<article className="content">
 				<div className="container">
-					<h1 className="bar">記事のタイトル</h1>
+					<h1 className="bar">{data.contentfulBlogPost.title}</h1>
 					<aside className="info">
-						<time dateTime="XXXX-XX-XX">
+						<time dateTime={data.contentfulBlogPost.publishDate}>
 							<FontAwesomeIcon icon={faClock} />	
-							XXXX年XX月XX日</time>
+              {data.contentfulBlogPost.publishDateJP}
+            </time>
 						<div className="cat">
 							<FontAwesomeIcon icon={faFolderOpen} />	
 							<ul>
-								<li className="スラッグ">カテゴリーＡ</li>
-								<li className="スラッグ">カテゴリーＢ</li>
+                {data.contentfulBlogPost.category.map(cat => (
+                  <li className={cat.categorySlug} key={cat.id}>
+                    {cat.category}
+                  </li>
+                ))}
 							</ul>
 						</div>
 					</aside>
@@ -56,3 +65,25 @@ const BlogSpot = () => (
 )
 
 export default BlogSpot
+
+export const query = graphql`
+	query {
+    contentfulBlogPost {
+      title
+      publishDateJP:publishDate(formatString: "YYYY年MM月DD日")
+      publishDate
+			category {
+				category
+				categorySlug
+        id
+			}
+      eyecatch {
+        gatsbyImageData(
+          width: 1600
+          formats: [AUTO, WEBP]
+        )
+        description
+      }
+    }
+  }	
+`
