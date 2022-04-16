@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faFolderOpen } from "@fortawesome/free-regular-svg-icons"
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"
 
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
+
 const BlogSpot = ({ data }) => (
   <Layout>
 		<div>
@@ -38,11 +40,7 @@ const BlogSpot = ({ data }) => (
 						</div>
 					</aside>
 					<div className="postbody">
-						<p>
-							記事の本文です。記事の本文です。記事の本文です。記事の本文です。記事の本文です。
-							記事の本文です。記事の本文です。記事の本文です。記事の本文です。記事の本文です。
-							記事の本文です。記事の本文です。記事の本文です。記事の本文です。記事の本文です。
-						</p>
+            {renderRichText(data.contentfulBlogPost.content, {})}
 					</div>
 					<ul className="postlink">
 						<li className="prev">
@@ -68,7 +66,7 @@ export default BlogSpot
 
 export const query = graphql`
 	query {
-    contentfulBlogPost {
+    contentfulBlogPost(slug: {eq: "everyday"}) {
       title
       publishDateJP:publishDate(formatString: "YYYY年MM月DD日")
       publishDate
@@ -83,6 +81,9 @@ export const query = graphql`
           formats: [AUTO, WEBP]
         )
         description
+      }
+      content {
+        raw
       }
     }
   }	
