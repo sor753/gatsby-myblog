@@ -22,6 +22,16 @@ const options = {
       {children}
       </h2>
     ),
+    [BLOCKS.EMBEDDED_ASSET]: node => (
+      <GatsbyImage
+        image={ getImage(node.data.target) }
+        alt={ 
+          node.data.target.description
+            ? node.data.target.description
+            : node.data.target.title
+        }
+      />
+    ),
   },
 }
 const BlogSpot = ({ data }) => (
@@ -99,6 +109,15 @@ export const query = graphql`
       }
       content {
         raw
+        references {
+          ... on ContentfulAsset {
+            contentful_id
+            __typename
+            gatsbyImageData
+            title
+            description
+          }
+        }
       }
     }
   }	
