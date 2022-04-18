@@ -1,7 +1,7 @@
 import * as React from "react"
-import { graphql } from "gatsby"
 import Img from "gatsby-image"
-
+import { graphql, Link } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout'
 
 import Seo from '../components/seo'
@@ -65,6 +65,27 @@ const IndexPage = ({ data }) => (
         />
       </figure>
     </section>
+    <section>
+      <div className="container">
+        <h2 className="sr-only">RECENT POSTS</h2>
+        <div className="posts">
+          {data.allContentfulBlogPost.edges.map(({ node }) => (
+            <article className="post" key={node.id}>
+              <Link to={`/blog/post/${node.slug}`}>
+                <figure>
+                  <GatsbyImage
+                    image={getImage(node.eyecatch.gatsbyImageData)}
+                    alt={node.eyecatch.description}
+                    style={{ height: "100%", width: "100%" }}
+                  />
+                </figure>
+                <h3>{node.title}</h3>
+              </Link>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   </Layout>
 )
 
@@ -115,5 +136,22 @@ export const query = graphql`
 				}
 			}
 		}
+    allContentfulBlogPost(
+      sort: {order: DESC, fields: publishDate}
+      skip: 0
+      limit: 4
+    ) {
+      edges {
+        node {
+          title
+          id
+          eyecatch {
+            gatsbyImageData
+            description
+          }
+          slug
+        }
+      }
+    }
 	}
 `
