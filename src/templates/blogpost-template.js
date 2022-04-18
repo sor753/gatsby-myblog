@@ -13,6 +13,7 @@ import {
 
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { BLOCKS } from "@contentful/rich-text-types"
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 
 import Seo from '../components/seo'
 
@@ -41,10 +42,14 @@ const options = {
     }, []);
   },
 }
-const BlogSpot = ({ data, pageContext }) => (
+const BlogSpot = ({ data, pageContext, location }) => (
   <Layout>
     <Seo
       pagetitle={data.contentfulBlogPost.title}
+      pagedesc={`${
+        documentToPlainTextString(JSON.parse(data.contentfulBlogPost.content.raw)).slice(0, 70)
+      }...`}
+      pagepath={location.pathname}
     />
 		<div>
 			<div className="eyecatch">
