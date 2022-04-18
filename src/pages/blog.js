@@ -2,9 +2,15 @@ import * as React from "react"
 import { graphql, Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout'
+import Seo from '../components/seo'
 
-const Blog = ({ data }) => (
+const Blog = ({ data, location }) => (
   <Layout>
+    <Seo
+      pagetitle="ブログ"
+      pagedesc="ESSENTIALのブログです"
+      pagepath={location.pathname}
+    />
     <section className="content bloglist">
       <div className="container">
         <h1 className="bar">RECENT POSTS</h1>
