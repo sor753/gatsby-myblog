@@ -14,6 +14,8 @@ import {
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { BLOCKS } from "@contentful/rich-text-types"
 
+import Seo from '../components/seo'
+
 const options = {
   renderNode: {
     [BLOCKS.HEADING_2]: (node, children) => (
@@ -41,6 +43,9 @@ const options = {
 }
 const BlogSpot = ({ data, pageContext }) => (
   <Layout>
+    <Seo
+      pagetitle={data.contentfulBlogPost.title}
+    />
 		<div>
 			<div className="eyecatch">
 				<figure>
