@@ -1,5 +1,6 @@
 import * as React from "react"
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout'
 
 const Blog = ({ data }) => (
@@ -10,12 +11,16 @@ const Blog = ({ data }) => (
         <div className="posts">
           {data.allContentfulBlogPost.edges.map(({ node }) => (
             <article className="post" key={node.id}>
-              <a href="base-blogpost.html">
+              <Link to={`/blog/post/${node.slug}`}>
                 <figure>
-                  <img src="images-baseblog/eyecatch.jpg" alt="アイキャッチ画像の説明" />
+                  <GatsbyImage
+                    image={getImage(node.eyecatch.gatsbyImageData)}
+                    alt={node.eyecatch.description}
+                    style={{ height: "100%", width: "100%" }}
+                  />
                 </figure>
                 <h3>{node.title}</h3>
-              </a>
+              </Link>
             </article>
           ))}
         </div>
@@ -35,6 +40,11 @@ export const query = graphql`
         node {
           title
           id
+          eyecatch {
+            gatsbyImageData
+            description
+          }
+          slug
         }
       }
     }
