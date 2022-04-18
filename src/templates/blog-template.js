@@ -4,7 +4,13 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 
-const Blog = ({ data, location }) => (
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons"
+
+const Blog = ({ data, location, pageContext }) => (
   <Layout>
     <Seo
       pagetitle="ブログ"
@@ -30,6 +36,32 @@ const Blog = ({ data, location }) => (
             </article>
           ))}
         </div>
+        <ul className="pagenation">
+          {!pageContext.isFirst && (
+            <li className="prev">
+              <Link
+                to={
+                  pageContext.currentPage === 2
+                    ? `/blog/`
+                    : `/blog/${pageContext.currentPage - 1}/`
+                }
+                rel="prev"
+              >
+                <FontAwesomeIcon icon={faChevronLeft} />
+                <span>前のページ</span>
+              </Link>
+            </li>
+          )}
+
+          {!pageContext.isLast && (
+            <li className="next">
+              <Link to={`/blog/${pageContext.currentPage + 1}/`} rel="next">
+                <span>次のページ</span>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </Link>
+            </li>
+          )}
+        </ul>
       </div>
     </section>
   </Layout>
@@ -38,11 +70,11 @@ const Blog = ({ data, location }) => (
 export default Blog
 
 export const query = graphql`
-  query {
+  query($skip: Int!, $limit: Int!) {
     allContentfulBlogPost(
       sort: {order: DESC, fields: publishDate}
-      skip: 0
-      limit: 6
+      skip: $skip
+      limit: $limit
     ) {
       edges {
         node {
