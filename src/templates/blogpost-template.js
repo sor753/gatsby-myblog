@@ -50,6 +50,9 @@ const BlogSpot = ({ data, pageContext, location }) => (
         documentToPlainTextString(JSON.parse(data.contentfulBlogPost.content.raw)).slice(0, 70)
       }...`}
       pagepath={location.pathname}
+      blogimg={`https:${data.contentfulBlogPost.eyecatch.file.url}`}
+      pageimgw={data.contentfulBlogPost.eyecatch.file.width}
+      pageimgh={data.contentfulBlogPost.eyecatch.file.height}
     />
 		<div>
 			<div className="eyecatch">
@@ -125,6 +128,15 @@ export const query = graphql`
           formats: [AUTO, WEBP]
         )
         description
+        file {
+          details {
+            image {
+              width
+              height
+            }
+          }
+          url
+        }
       }
       content {
         raw
