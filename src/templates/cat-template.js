@@ -13,8 +13,8 @@ import {
 const Blog = ({ data, location, pageContext }) => (
   <Layout>
     <Seo
-      pagetitle="ブログ"
-      pagedesc="ESSENTIALのブログです"
+      pagetitle={`CATEGORY: ${pageContext.catname}`}
+      pagedesc={`「${pageContext.catname}」カテゴリーの記事です`}
       pagepath={location.pathname}
     />
     <section className="content bloglist">
